@@ -49,6 +49,10 @@ define([
         $(qElement).removeClass(['is-full','is-left-','is-right']).addClass(qAlign);
         
         fComponent.classList.value=[];
+        var onScreen = view.model.get('_onScreen');
+        if (onScreen && onScreen._isEnabled) {
+            fComponent.classList.add(onScreen._classes.trim() + '-before');
+        }
         fComponent.classList.add('component');
         fComponent.classList.add('text');
         fComponent.classList.add('is-tutor-feedback');
@@ -100,6 +104,14 @@ define([
           $(qElement).after(fComponent);
         } else if (fAlign === 'is-left') {
           $(qElement).before(fComponent);
+        }
+        if (onScreen && onScreen._isEnabled) {
+          _.delay(
+            () => {
+              fComponent.classList.add(onScreen._classes.trim() + '-after');
+            },
+            100
+          );
         }
         break;
       }
