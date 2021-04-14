@@ -21,7 +21,11 @@ With the [Adapt CLI](https://github.com/adaptlearning/adapt-cli) installed, run 
 
 ## Settings  
 
-**Tutor** has no attributes to configure.  
+Select the feedback display style in **Config**
+
+1. Modal (default) - display feedback text as a modal notification
+2. Left - display feedback text as an inline text component to the left of the associated question  
+3. Right - display feedback text as an inline text component to the right of the associated question  
 
 ## Limitations
 
