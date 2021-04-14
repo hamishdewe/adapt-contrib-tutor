@@ -1,12 +1,12 @@
 {
   "name": "adapt-contrib-tutor",
-  "version": "3.0.0",
+  "version": "3.0.0.25",
   "framework": ">=5",
-  "homepage": "https://github.com/adaptlearning/adapt-contrib-tutor",
-  "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
+  "homepage": "https://github.com/hamishdewe/adapt-contrib-tutor",
+  "issues": "https://github.com/hamishdewe/adapt_framework/issues/new",
   "extension" : "tutor",
   "displayName" : "Tutor",
-  "description": "An extension which provides a basic feedback overlay for question components",
+  "description": "An extension which provides a basic feedback display for question components",
   "main": "/js/adapt-contrib-tutor.js",
   "keywords": [
     "adapt-plugin",

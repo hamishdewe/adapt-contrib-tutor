@@ -8,7 +8,28 @@
       "properties": {
         "config": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "_tutor": {
+              "type": "object",
+              "required": false,
+              "legend": "Tutor",
+              "properties": {
+                "displayFeedback": {
+                  "type": "string",
+                  "required": false,
+                  "default": "modal",
+                  "inputType": {
+                    "type": "Select", 
+                    "options": [
+                      "modal", "left", "right"
+                    ]
+                  },
+                  "title": "Display feedback",
+                  "help": "'Modal' is the standard Tutor display. Optionally display feedback text in a new component, either left or right of the question."
+                }
+              }
+            }
+          }
         }
       }
     }
