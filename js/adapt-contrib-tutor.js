@@ -48,10 +48,29 @@ define([
         
         $(qElement).removeClass(['is-full','is-left-','is-right']).addClass(qAlign);
         
+        fComponent.classList.value=[];
         fComponent.classList.add('component');
         fComponent.classList.add('text');
+        fComponent.classList.add('is-tutor-feedback');
         fComponent.classList.add(`${qId}-feedback`);
         fComponent.classList.add(`${fAlign}`);
+        if (view.model.has('_isCorrect')) {
+          // Attach specific classes so that feedback can be styled.
+          if (view.model.get('_isCorrect')) {
+            fComponent.classList.add('is-correct');
+          } else {
+            if (view.model.has('_isAtLeastOneCorrectSelection')) {
+              // Partially correct feedback is an option.
+              if (view.model.get('_isAtLeastOneCorrectSelection')) {
+                fComponent.classList.add('is-partially-correct');
+              } else {
+                fComponent.classList.add('is-incorrect');
+              }
+            } else {
+              fComponent.classList.add('is-incorrect');
+            }
+          }
+        }
         $(fComponent).attr('data-adapt-id', `${qId}-feedback`);
         fComponent.innerHTML = `
           <div class="component__inner text__inner">
