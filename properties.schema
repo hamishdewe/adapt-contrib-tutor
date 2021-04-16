@@ -26,6 +26,15 @@
                   },
                   "title": "Display feedback",
                   "help": "'Modal' is the standard Tutor display. Optionally display feedback text in a new component, either left or right of the question."
+                },
+                "allowResize": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "inputType": "Checkbox",
+                  "validators": [],
+                  "title": "Allow question resize",
+                  "help": "If true, allow Tutor to resize a fullwidth question left/right and place the feedback alongside. Otherwise, place the feedback fullwidth above/below the question"
                 }
               }
             }

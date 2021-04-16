@@ -43,15 +43,29 @@ define([
         var qId = view.model.get('_id');
         var qElement = $(`div[data-adapt-id=${qId}]`)[0];
         var fComponent = $(`div[data-adapt-id=${qId}-feedback]`)[0] || document.createElement('div');
-        var qAlign = config.displayFeedback === 'left' ? 'is-right' : 'is-left';
-        var fAlign = config.displayFeedback === 'left' ? 'is-left' : 'is-right';
+        var fAlign = '';
+        var prepend = config.displayFeedback === 'left';
+        var resize = config.allowResize;
+        var siblingCount = view.model.getSiblings().length;
+        if (siblingCount === 0) {
+          if (resize || view.model.get('_layout') !== 'full') {
+            // Resize a fullwidth question or realign a half-width question
+            var qAlign = config.displayFeedback === 'left' ? 'is-right' : 'is-left';
+            $(qElement).removeClass(['is-full', 'is-left', 'is-right']).addClass(qAlign);
+            fAlign = config.displayFeedback === 'left' ? 'is-left' : 'is-right';
+          } else {
+            fAlign = 'is-full';
+          }
+        } else {
+          fAlign = 'is-full';
+        }
         
-        $(qElement).removeClass(['is-full','is-left-','is-right']).addClass(qAlign);
+        
         
         fComponent.classList.value=[];
         var onScreen = view.model.get('_onScreen');
         if (onScreen && onScreen._isEnabled) {
-            fComponent.classList.add(onScreen._classes.trim() + '-before');
+          fComponent.classList.add(onScreen._classes.trim() + '-before');
         }
         fComponent.classList.add('component');
         fComponent.classList.add('text');
@@ -100,10 +114,26 @@ define([
               </div>
             </div>
           </div>`;
-        if (fAlign === 'is-right') {
-          $(qElement).after(fComponent);
-        } else if (fAlign === 'is-left') {
-          $(qElement).before(fComponent);
+          
+        if (prepend) {
+          if (siblingCount === 0) {
+            $(qElement).before(fComponent);
+          } else {
+            var appendModel = view.model.getParent().getChildren().models[0];
+            var elId = appendModel.get('_id');
+            var appendTo = $(`div[data-adapt-id=${elId}]`)[0];
+            $(appendTo).before(fComponent);
+          }
+        } else {
+          if (siblingCount === 0) {
+            $(qElement).after(fComponent);
+          } else {
+            var models = view.model.getParent().getChildren().models;
+            var appendModel = models[models.length - 1];
+            var elId = appendModel.get('_id');
+            var appendTo = $(`div[data-adapt-id=${elId}]`)[0];
+            $(appendTo).after(fComponent);
+          }
         }
         if (onScreen && onScreen._isEnabled) {
           _.delay(
